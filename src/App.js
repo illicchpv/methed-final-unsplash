@@ -3,10 +3,10 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, Route, Routes, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {assignId} from './utils/genRandomId';
-import {authPageUrl} from './api/auth';
 import {authAsync} from './store/auth/authActions';
 import {authSlice} from './store/auth/authSlice';
 import classNames from 'classnames';
+import {handleDoAuth, restoreCurPage} from './store/auth/authUtils';
 
 const PAGES = [
   {
@@ -36,19 +36,24 @@ const isPathSelected = (location_path, el) => {
 };
 
 function Auth() {
-  const url = authPageUrl;
   const dispatch = useDispatch();
   const {loading, error, code, access_token, refresh_token, userInfo} = useSelector(state => state.authReducer);
-  const linkClass = classNames(!!access_token && _.disabledLink, true && _.authLink);
+  // const linkClass = classNames(!!access_token && _.disabledLink, true && _.authLink);
 
   return (
     <div className={_.auth}>
-      <Link className={linkClass} to={url}>авторизоваться</Link>
+      {/* <Link className={linkClass} to={url}>авторизоваться</Link> */}
+
+      <button disabled={!!access_token}
+        onClick={handleDoAuth}
+      >авторизоваться</button>
+
       <button disabled={!access_token}
         onClick={() => {
           dispatch(authSlice.actions.authClear());
         }}
       >выйти</button>
+
       <p>
         loading: <span>{loading}</span> <br />
         error: <span>{error}</span> <br />
@@ -58,7 +63,7 @@ function Auth() {
         name+:
         {userInfo.name && <>
           <span>{userInfo?.name}:</span>
-          <img src={userInfo?.largeImage} alt='моё большое фото' /> <br/>
+          <img src={userInfo?.largeImage} alt='моё большое фото' /> <br />
           requests remaining/limit: {userInfo?.request_remaining}/{userInfo?.request_limit}<br />
         </>}
 
@@ -89,14 +94,19 @@ function App() {
   let location = useLocation();
   const code = useSearchParams()[0].get("code");
   const dispatch = useDispatch();
+  const {requestCount} = useSelector(state => state.authReducer);
+  console.log('requestCount: ', requestCount);
 
 
   useEffect(() => {
     if (code) {
       dispatch(authAsync(code));
-      navigate('/tstauth');
     }
-  }, [code, navigate]);
+  }, [code, dispatch]);
+
+  useEffect(() => {
+    restoreCurPage(navigate, requestCount);
+  }, [requestCount, navigate]);
 
   return (
     <>

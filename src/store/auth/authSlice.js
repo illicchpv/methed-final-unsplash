@@ -8,6 +8,7 @@ const initialState = {
   access_token: '',
   refresh_token: '',
   userInfo: {},
+  requestCount: 0,
 };
 
 export const authSlice = createSlice({
@@ -48,6 +49,7 @@ export const authSlice = createSlice({
         request_limit: action.payload.request_limit,
         request_remaining: action.payload.request_remaining,
       };
+      state.requestCount = 1 + state.requestCount;
     },
     [authAsync.rejected.type]: (state, action) => {
       // debugger;
@@ -57,6 +59,7 @@ export const authSlice = createSlice({
       state.access_token = '';
       state.refresh_token = '';
       state.userInfo = {};
+      state.requestCount = 1 + state.requestCount;
     },
   },
 });

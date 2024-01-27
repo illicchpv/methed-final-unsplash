@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {URL_GET_TOKEN, URL_GET_USER_INFO, makeAuthParams} from "../../api/auth";
+import {URL_GET_TOKEN, URL_GET_USER_INFO, makeAuthParams} from "./authUtils";
 
 // import {authAsync} from './store/auth/authActions';
 // dispatch(authAsync(code));
@@ -29,7 +29,7 @@ export const authAsync = createAsyncThunk(
             headers: {'Authorization': `Bearer ${access_token}`, },
           })
           .then(function (response) {
-            console.log('response.data:', JSON.stringify(response.data, null, 2))
+            // console.log('response.data:', JSON.stringify(response.data, null, 2))
             response.data.code = code;
             response.data.access_token = access_token;
             response.data.refresh_token = refresh_token;
