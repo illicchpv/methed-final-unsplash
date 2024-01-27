@@ -55,7 +55,13 @@ function Auth() {
         code: <span>{code}</span> <br />
         access_token: <span>{access_token}</span> <br />
         refresh_token: <span>{refresh_token}</span> <br />
-        name: <span>{userInfo?.name}:</span> <img src={userInfo?.largeImage} alt='моё большое фото' /><br />
+        name+:
+        {userInfo.name && <>
+          <span>{userInfo?.name}:</span>
+          <img src={userInfo?.largeImage} alt='моё большое фото' /> <br/>
+          requests remaining/limit: {userInfo?.request_remaining}/{userInfo?.request_limit}<br />
+        </>}
+
       </p>
     </div>
   );

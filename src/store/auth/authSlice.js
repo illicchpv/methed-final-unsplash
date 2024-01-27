@@ -45,6 +45,8 @@ export const authSlice = createSlice({
       state.userInfo = {
         name: action.payload.name,
         largeImage: action.payload.profile_image.large,
+        request_limit: action.payload.request_limit,
+        request_remaining: action.payload.request_remaining,
       };
     },
     [authAsync.rejected.type]: (state, action) => {

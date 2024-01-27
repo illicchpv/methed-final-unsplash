@@ -29,9 +29,12 @@ export const authAsync = createAsyncThunk(
             headers: {'Authorization': `Bearer ${access_token}`, },
           })
           .then(function (response) {
+            console.log('response.data:', JSON.stringify(response.data, null, 2))
             response.data.code = code;
             response.data.access_token = access_token;
             response.data.refresh_token = refresh_token;
+            response.data.request_limit = +response.headers['x-ratelimit-limit'];
+            response.data.request_remaining = +response.headers['x-ratelimit-remaining'];
             return response.data;
           });
       });
