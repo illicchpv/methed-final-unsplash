@@ -7,6 +7,7 @@ const initialState = {
   code: '',
   access_token: '',
   refresh_token: '',
+  userInfo: {},
 };
 
 export const authSlice = createSlice({
@@ -23,6 +24,7 @@ export const authSlice = createSlice({
       state.code = '';
       state.access_token = '';
       state.refresh_token = '';
+      state.userInfo = {};
     }
   },
 
@@ -31,22 +33,28 @@ export const authSlice = createSlice({
     [authAsync.pending.type]: (state, action) => {
       state.loading = true;
       state.error = '';
+      state.userInfo = {};
     },
     [authAsync.fulfilled.type]: (state, action) => {
-      // debugger
+      // debugger;
       state.loading = false;
       state.error = '';
       state.code = action.payload.code;
       state.access_token = action.payload.access_token;
       state.refresh_token = action.payload.refresh_token;
+      state.userInfo = {
+        name: action.payload.name,
+        largeImage: action.payload.profile_image.large,
+      };
     },
     [authAsync.rejected.type]: (state, action) => {
-      // debugger
+      // debugger;
       state.loading = false;
       state.error = action.error.message;
       state.code = '';
       state.access_token = '';
       state.refresh_token = '';
+      state.userInfo = {};
     },
   },
 });

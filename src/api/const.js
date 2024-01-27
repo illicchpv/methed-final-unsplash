@@ -12,6 +12,8 @@ z2KN353YPVDhsDxIfKzKgD10pgt8qfDEi08NySqY_bQ
 */
 
 export const RESPONSE_TYPE = 'code';
-export const URL_AUTH = 'https://unsplash.com/oauth/authorize';
 export const CLIENT_ID = ACCESS_KEY;
 export const SCOPE_STRING = 'public read_user read_photos write_likes';
+
+export const URL_AUTH = 'https://unsplash.com/oauth/authorize';
+export const URL_API = 'https://api.unsplash.com';

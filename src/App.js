@@ -38,42 +38,43 @@ const isPathSelected = (location_path, el) => {
 function Auth() {
   const url = authPageUrl;
   const dispatch = useDispatch();
-  const {loading, error, code, access_token, refresh_token} = useSelector(state => state.authReducer);
-  const linkClass = classNames(!!access_token && _.disabledLink,  true && _.authLink)
+  const {loading, error, code, access_token, refresh_token, userInfo} = useSelector(state => state.authReducer);
+  const linkClass = classNames(!!access_token && _.disabledLink, true && _.authLink);
 
   return (
-  <div className={_.auth}>
-    <Link className={linkClass} to={url}>авторизоваться</Link>
-    <button disabled={!access_token}
-      onClick={() => {
-        dispatch(authSlice.actions.authClear());
-      }}
-    >выйти</button>
-    <p>
-      loading: <span>{loading}</span> <br/>
-      error: <span>{error}</span> <br/>
-      code: <span>{code}</span> <br/>
-      access_token: <span>{access_token}</span> <br/>
-      refresh_token: <span>{refresh_token}</span> <br/>
-    </p>
-  </div>
+    <div className={_.auth}>
+      <Link className={linkClass} to={url}>авторизоваться</Link>
+      <button disabled={!access_token}
+        onClick={() => {
+          dispatch(authSlice.actions.authClear());
+        }}
+      >выйти</button>
+      <p>
+        loading: <span>{loading}</span> <br />
+        error: <span>{error}</span> <br />
+        code: <span>{code}</span> <br />
+        access_token: <span>{access_token}</span> <br />
+        refresh_token: <span>{refresh_token}</span> <br />
+        name: <span>{userInfo?.name}:</span> <img src={userInfo?.largeImage} alt='моё большое фото' /><br />
+      </p>
+    </div>
   );
 }
 
 function Test1() {
 
   return (
-  <div>
-    Test1
-  </div>
+    <div>
+      Test1
+    </div>
   );
 }
 function Test2() {
 
   return (
-  <div>
-    test2
-  </div>
+    <div>
+      test2
+    </div>
   );
 }
 

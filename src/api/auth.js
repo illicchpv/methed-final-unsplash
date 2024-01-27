@@ -11,9 +11,14 @@ import {
   REDIRECT_URI,
   SCOPE_STRING,
   SECRET_KEY,
+  URL_API,
 } from './const.js';
 
+// https://unsplash.com/documentation/user-authentication-workflow#authorization-workflow
 export const URL_GET_TOKEN = 'https://unsplash.com/oauth/token';
+
+// https://unsplash.com/documentation#get-the-users-profile
+export const URL_GET_USER_INFO = `${URL_API}/me`;
 
 const searchParams = new URLSearchParams('');
 searchParams.append('client_id', CLIENT_ID);
