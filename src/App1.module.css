@@ -1,0 +1,46 @@
+.selected{
+  color: red;
+}
+.navigation{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+  margin: 0 10px;
+}
+.navigation button{
+  padding: 10px 20px;
+}
+.page{
+  border: 1px solid darkgrey;
+  padding: 20px;
+  margin: 0 10px;
+}
+.authLink{
+  display: inline-block;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid darkgrey;
+  border-radius: 10px;
+}
+.authLink:hover{
+  background-color: lightgoldenrodyellow;
+}
+.auth button{
+  display: inline-block;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid darkgrey;
+  border-radius: 10px;
+}
+.auth button:hover{
+  background-color: lightgoldenrodyellow;
+}
+.auth button[disabled]{
+  pointer-events: none;
+}
+.disabledLink{
+  color: rgba(16, 16, 16, 0.3);
+  pointer-events: none;
+}

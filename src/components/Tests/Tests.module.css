@@ -1,0 +1,22 @@
+.Tests{
+  padding: 20px;
+  border: 1px solid lightslategray;
+  margin: 10px;
+  min-height: 300vh;
+}
+
+.auth {
+  button{
+    display: inline-block;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+  }
+  button:hover{
+    background-color: lightgoldenrodyellow;
+  }
+  button[disabled]{
+    pointer-events: none;
+  }  
+}

@@ -1,0 +1,28 @@
+.TestsHelper{
+  height: 50px;
+  position: relative;
+
+  .line{
+    position: fixed;
+    color: red;
+    padding: 5px;
+    font-size: 12px;
+    background-color: rgba(222, 184, 135, 0.3);
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    button{
+      padding: 3px 10px;
+    }
+    button:hover{
+      color: red;
+    }
+    .selected{
+      color: red;
+      pointer-events: none;
+    }
+  }
+
+}
