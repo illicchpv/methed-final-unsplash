@@ -13,6 +13,8 @@
   overflow-x: hidden;
   padding: 20px 15px;
   inset: 5%;
+  top:5px;
+  bottom: 5px;
   border-radius: 16px;
   margin-bottom: 10px;
 }
@@ -59,7 +61,9 @@
 @media (min-width: 768px) {
   .modal {
     padding: 30px;
-    inset: 10%;
+    inset: 5%;
+    top:5px;
+    bottom: 5px;
   }
 
   .modal h2 {
@@ -79,6 +83,8 @@
 @media (min-width: 1024px) {
   .modal {
     padding: 50px;
-    inset: 15%;
+    inset: 5%;
+    top:5px;
+    bottom: 5px;
   }
 }

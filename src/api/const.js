@@ -1,4 +1,4 @@
-export const TEST_MENU = true;
+export const TEST_MENU = false;
 
 export const ACCESS_KEY = '5HKN-FQSq9cXLU8Xj80_YKixrim1ZBCIoxacqc73sL0';
 export const SECRET_KEY = 'bLaj9yb-zky0XtOmQ1Ckqz5hrNUIzARdw_sQznWKebI';

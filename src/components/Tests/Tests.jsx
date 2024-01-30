@@ -25,8 +25,8 @@ export function TestList(props) {
   const userInfo = useSelector(state => state.authReducer.userInfo);
   const logIn = !!userInfo?.name;
   const endList = useRef(null);
-  const navigate = useNavigate();
   const doAutoLoad = false;
+  const navigate = useNavigate();
 
   const c = endList.current;
   useEffect(() => {

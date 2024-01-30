@@ -13,9 +13,8 @@ export function MainPicItem(props) {
   const userInfo = useSelector(state => state.authReducer.userInfo);
   const logIn = !!userInfo?.name;
   console.log('userInfo?.name: ', userInfo?.name);
-  
-  console.log(`logIn:${logIn} el.liked_by_user: `, el.liked_by_user);
 
+  console.log(`logIn:${logIn} el.liked_by_user: `, el.liked_by_user);
 
   useEffect(() => {
     dispatch(photoItemAsync(id)); // 
@@ -59,8 +58,10 @@ export function MainPicItem(props) {
           {/* user.portfolio_url: {el.user.portfolio_url}<br /> */}
           {/* user.profile_image: {el.user.profile_image}<br /> */}
 
-          <p className={_.aboutPhoto}>Фото сделано пользователем "{el.user.username}" в {formatDate(el.created_at)}.
-            Получило {el.likes} лайков {el.liked_by_user && 'включая ваш'}.
+          <p className={_.aboutPhoto}>
+            Фото сделано пользователем "{el.user.username}"
+            в {formatDate(el.created_at)}.
+            <br />Получило {el.likes} лайков {el.liked_by_user && 'включая ваш'}.
             {el.liked_by_user && <button
               onClick={handleDelLike}
             >отменить лайк</button>}
@@ -72,9 +73,9 @@ export function MainPicItem(props) {
 
           <a className={_.portFolioBox} href={el.user.portfolio_url} target='_blank' rel="noreferrer">
             <img src={el.user.profile_image_m} alt={"фото автора - " + el.user.username} />
-            <span>ссылка на портфолио автора {el.user.portfolio_url ?? '- отсутствует'}</span>
+            <span>на портфолио автора {!el.user.portfolio_url && '- отсутствует'}</span>
           </a>
-          <p>Место проживания "{el.user.username}" - {el.user.location ?? 'неизвестно' }</p>
+          <span>Место проживания "{el.user.username}" - {el.user.location ?? 'неизвестно'}</span>
           <hr />
           <p>Описание фотографии:</p>
           <p>{el.description}</p>

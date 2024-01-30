@@ -21,13 +21,13 @@ export function MainPicListItem(props) {
     dispatch(photoItemBadAsync(id));
   };
   
-  
+  console.log('location.pathname: ', location.pathname);
 
   return (
     <li className={_.MainPicListItem}>
       <div className={_.imgBox}>
 
-        <Link to={location.pathname + "/" + el.id}
+        <Link to={location.pathname + props.add + "/" + el.id}
           title={'фото сделано ' + formatDate(el.created_at)}
         ><img className={_.listImg} src={el.urls.thumb} alt={el.alt_description} /></Link>
 

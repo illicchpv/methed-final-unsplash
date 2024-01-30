@@ -1,0 +1,90 @@
+.btn {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.userBlock{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.userPic{
+  border: 3px solid rgba(84, 84, 235, 0.3);
+  border-radius: 50%;
+}
+.userName{
+  padding-left: 3px;
+  text-transform: capitalize;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: end;  
+}
+
+.logout {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  background-color: var(--orange);
+  border: 0;
+  color: var(--white);
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authLink {
+  display: block;
+  width: 30px;
+  height: 30px;
+  outline: 2px solid transparent;
+  border-radius: 50%;
+  outline-offset: 2px;
+  transition: outline-color 0.36s ease-in-out;
+}
+
+.authLink:hover {
+  outline-color: var(--orange);
+}
+
+.authLink:focus {
+  outline-color: var(--orange);
+}
+
+.authLink:active {
+  outline-color: var(--orange);
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  color: var(--orange);
+}
+
+
+@media (min-width: 768px) {
+  .btn {
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+  }
+}

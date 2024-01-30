@@ -20,7 +20,14 @@ import {MainPicItem} from './components/MainPicItem/MainPicItem';
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const code = useSearchParams()[0].get("code");
+  let code = useSearchParams()[0].get("code");
+  if(!code){
+    const hr = window.location.href;
+    if(hr.includes('?code=')){
+      code = hr.split('?code=')[1].split('#')[0];
+      window.history.replaceState(null, null, hr.split('?code=')[0]);
+    }
+  }
   const {requestCount} = useSelector(state => state.authReducer);
   console.log('requestCount: ', requestCount);
 
@@ -40,7 +47,13 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Main />}>
-          <Route path="pic/:id" element={<MainPicListItem />} />
+
+          <Route path='/pic/:id' element={
+            <Modal closePath='/'>
+              <MainPicItem />
+            </Modal>
+          } />
+
         </Route>
 
         {TEST_MENU && <>
