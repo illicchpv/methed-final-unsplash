@@ -30,7 +30,8 @@ export const makeAuthParams = (code, err) => {
   };
 };
 
-export const handleDoAuth = () => {
+export const handleDoAuth = (add) => {
+  // console.log('add: ', add);
   // store current page
   const pagePath = window.location.pathname;
   console.log('window.location.pathname: ', pagePath);
@@ -54,4 +55,4 @@ export const restoreCurPage = (navigate, requestCount) => {
     sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
     navigate(path);
   }
-}
+};

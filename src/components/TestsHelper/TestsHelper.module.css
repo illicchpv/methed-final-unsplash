@@ -4,6 +4,7 @@
 
   .line{
     position: fixed;
+    z-index: 100;
     color: red;
     padding: 5px;
     font-size: 12px;

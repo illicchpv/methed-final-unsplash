@@ -30,6 +30,7 @@ export const authSlice = createSlice({
   },
 
   // const {access_token} = useSelector(state => state.authReducer);
+  // const userInfo = getState().authReducer.userInfo;
   extraReducers: {
     [authAsync.pending.type]: (state, action) => {
       state.loading = true;

@@ -65,6 +65,7 @@ body {
   font-weight: 400;
   background-color: var(--grayF5);
   color: var(--black);
+  overflow-x: hidden;
 }
 
 img, svg {

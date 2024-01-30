@@ -8,11 +8,13 @@ import {authSlice} from './store/auth/authSlice';
 import classNames from 'classnames';
 import {handleDoAuth, restoreCurPage} from './store/auth/authUtils';
 import {Main} from './components/Main/Main';
-import {Tests, TestAuth} from './components/Tests/Tests';
+import {Tests, TestAuth, TestList} from './components/Tests/Tests';
 import {MainPicListItem} from './components/MainPicListItem/MainPicListItem';
 import {ErrorPage} from './components/ErrorPage/ErrorPage';
 import {TestsHelper} from './components/TestsHelper/TestsHelper';
 import {TEST_MENU} from './api/const';
+import {Modal} from './components/Modal/Modal';
+import {MainPicItem} from './components/MainPicItem/MainPicItem';
 
 
 function App() {
@@ -44,11 +46,17 @@ function App() {
         {TEST_MENU && <>
           <Route path="/test" element={<Tests />}>
             <Route path='auth' element={<TestAuth />} />
-            <Route path="list" element={<p>test list</p>} />
+            <Route path="list" element={<TestList />}>
+              <Route path='/test/list/:id' element={
+                <Modal closePath='/test/list'>
+                  <MainPicItem />
+                </Modal>
+              } />
+            </Route>
             <Route path="item" element={<p>test item</p>} />
           </Route>
         </>}
-        
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
