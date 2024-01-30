@@ -1,0 +1,22 @@
+<svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      path, rect, circle, line {
+        fill: white;
+        stroke: white;
+      }
+      .bg{
+        fill:transparent;
+      }
+    }    
+  </style>
+  <g clip-path="url(#clip0_14_4)">
+    <rect class="bg" width="68" height="68" fill="white"/>
+    <path d="M22 20V2H46V20H22ZM46 30H66V66H2V30H22V48H46V30Z" fill="black"/>
+    <rect x="12" y="18" width="44" height="2" fill="black"/>
+    <circle cx="28" cy="27" r="3" fill="black"/>
+    <circle cx="41" cy="27" r="3" fill="black"/>
+    <line x1="26.924" y1="41.5058" x2="39.924" y2="39.5058" stroke="black"/>
+    <line x1="34.5" y1="28" x2="34.5" y2="36" stroke="black"/>
+  </g>
+</svg>

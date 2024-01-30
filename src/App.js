@@ -12,7 +12,7 @@ import {Tests, TestAuth, TestList} from './components/Tests/Tests';
 import {MainPicListItem} from './components/MainPicListItem/MainPicListItem';
 import {ErrorPage} from './components/ErrorPage/ErrorPage';
 import {TestsHelper} from './components/TestsHelper/TestsHelper';
-import {TEST_MENU} from './api/const';
+import {REDIRECT_URI, SITE_ROOT, TEST_MENU} from './api/const';
 import {Modal} from './components/Modal/Modal';
 import {MainPicItem} from './components/MainPicItem/MainPicItem';
 
@@ -20,12 +20,21 @@ import {MainPicItem} from './components/MainPicItem/MainPicItem';
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {access_token} = useSelector(state => state.authReducer);
+  console.log('access_token: ', access_token);
+
   let code = useSearchParams()[0].get("code");
-  if(!code){
+console.log('===========1code: ', code);
+  if (!code && !access_token) {
     const hr = window.location.href;
-    if(hr.includes('?code=')){
+console.log('hr: ', hr);
+    if (hr.includes('?code=')) {
       code = hr.split('?code=')[1].split('#')[0];
-      window.history.replaceState(null, null, hr.split('?code=')[0]);
+console.log('2code: ', code);
+      const newUrl = hr.split('?code=')[0];
+console.log('newUrl: ', newUrl);
+// console.log('REDIRECT_URI: ', REDIRECT_URI);
+      window.history.replaceState(null, null, SITE_ROOT);
     }
   }
   const {requestCount} = useSelector(state => state.authReducer);

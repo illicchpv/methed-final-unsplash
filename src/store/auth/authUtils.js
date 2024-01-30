@@ -12,6 +12,7 @@ import {
   SCOPE_STRING,
   SECRET_KEY,
   URL_API,
+  SITE_ROOT,
 } from '../../api/const';
 
 // https://unsplash.com/documentation/user-authentication-workflow#authorization-workflow
@@ -50,7 +51,8 @@ export const handleDoAuth = (add) => {
 export const restoreCurPage = (navigate, requestCount) => {
   const settings = JSON.parse(sessionStorage.getItem('finalUnsplash')); // , JSON.stringify({pagePath: pagePath})
   if (settings && settings?.pagePath) {
-    const path = settings.pagePath; settings.pagePath = '';
+    let path = settings.pagePath; settings.pagePath = '';
+    path = path.replaceAll(SITE_ROOT, '/')
     console.log(`requestCount: [${requestCount}] ======== path: [${path}] ===========`);
     sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
     navigate(path);
