@@ -5,7 +5,6 @@ import {Link, Route, Routes, useLocation, useNavigate, useSearchParams} from "re
 import {assignId} from './utils/genRandomId';
 import {authAsync} from './store/auth/authActions';
 import {authSlice} from './store/auth/authSlice';
-import classNames from 'classnames';
 import {handleDoAuth, restoreCurPage} from './store/auth/authUtils';
 import {Main} from './components/Main/Main';
 import {Tests, TestAuth, TestList} from './components/Tests/Tests';
@@ -21,24 +20,30 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {access_token} = useSelector(state => state.authReducer);
-  console.log('access_token: ', access_token);
+  console.log('App() access_token: ', access_token);
 
   let code = useSearchParams()[0].get("code");
 console.log('===========1code: ', code);
   if (!code && !access_token) {
     const hr = window.location.href;
-console.log('hr: ', hr);
+console.log('===========hr: ', hr);
     if (hr.includes('?code=')) {
       code = hr.split('?code=')[1].split('#')[0];
-console.log('2code: ', code);
+console.log('===========2code: ', code);
       const newUrl = hr.split('?code=')[0];
-console.log('newUrl: ', newUrl);
-// console.log('REDIRECT_URI: ', REDIRECT_URI);
+console.log('===========newUrl: ', newUrl);
       window.history.replaceState(null, null, SITE_ROOT);
     }
   }
   const {requestCount} = useSelector(state => state.authReducer);
   console.log('requestCount: ', requestCount);
+
+
+  useEffect(() => {
+    if(!access_token){
+      dispatch(authSlice.actions.authRestore());
+    }
+  }, [access_token, dispatch]);
 
   useEffect(() => {
     if (code) {

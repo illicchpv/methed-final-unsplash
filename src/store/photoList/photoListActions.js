@@ -8,10 +8,15 @@ import {uniqByKeepFirst} from "../../utils/uniqByKey";
 export const photoListAsync = createAsyncThunk(
   'photoList/fetch',
   (page, reduxTK) => { // const {getState, dispatch} = reduxTK;
-    console.log('👉photoListAsync page: ', page);
     const {getState} = reduxTK;
-    const access_token = getState().authReducer.access_token;
+    let access_token = getState().authReducer.access_token;
+    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+    if (!access_token && settings && settings.auth) {
+      access_token = settings.auth.access_token;
+    }
     const photoList = getState().photoListReducer.photoList;
+
+    console.log('👉photoListAsync page: ', page, `access_token: ${access_token}`);
 
     return axios.get(getPhotoListUrl(page),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})
@@ -54,8 +59,8 @@ export const photoListAsync = createAsyncThunk(
         );
         if (data.length !== (len1 + len2)) { // на всякий случай, чтоб не было повторения ключей
           console.warn(`postsRequestSuccessAfter newPosts.${data.length} !== (${len1} + ${len2}): `);
-        }        
-        const rez = {page, data}
+        }
+        const rez = {page, data};
         // debugger;
         return rez; // response.data;
       });

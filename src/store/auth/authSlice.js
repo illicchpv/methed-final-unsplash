@@ -16,8 +16,8 @@ export const authSlice = createSlice({
   initialState,
 
   // import {authSlice} from './store/auth/authSlice';
-  // dispatch(authSlice.actions.authClear());
   reducers: {
+    // dispatch(authSlice.actions.authClear());
     authClear: (state, action) => {
       // debugger;
       state.loading = false;
@@ -26,7 +26,20 @@ export const authSlice = createSlice({
       state.access_token = '';
       state.refresh_token = '';
       state.userInfo = {};
-    }
+      const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+      settings.auth = undefined;
+      sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
+    },
+    // dispatch(authSlice.actions.authRestore());
+    authRestore: (state, action) => {
+      const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+      if (settings && settings.auth) {
+        state.code = settings.auth.code;
+        state.access_token = settings.auth.access_token;
+        state.refresh_token = settings.auth.refresh_token;
+        state.userInfo = settings.auth.userInfo;
+      }
+    },
   },
 
   // const {access_token} = useSelector(state => state.authReducer);

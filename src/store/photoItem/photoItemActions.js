@@ -8,10 +8,14 @@ import {photoListSlice} from "../photoList/photoListSlice";
 export const photoItemAsync = createAsyncThunk(
   'photoItem/fetch',
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
-    console.log('👉photoItemAsync id: ', id);
     const {getState} = reduxTK;
-    const access_token = getState().authReducer.access_token;
-    console.log('photoItemAsync access_token: ', access_token);
+    let access_token = getState().authReducer.access_token;
+    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+    if (!access_token && settings && settings.auth) {
+      access_token = settings.auth.access_token;
+    }
+
+    console.log('👉photoItemAsync id: ', id, `access_token: ${access_token}`);
 
     return axios.get(getPhotoItemUrl(id),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})
@@ -56,10 +60,13 @@ export const photoItemLikeAsync = createAsyncThunk(
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
     console.log('photoItemLikeAsync id: ', id);
     const {getState, dispatch} = reduxTK;
-    const access_token = getState().authReducer.access_token;
-    if(!access_token){
-      debugger;
+    let access_token = getState().authReducer.access_token;
+    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+    if (!access_token && settings && settings.auth) {
+      access_token = settings.auth.access_token;
     }
+
+    console.log('photoItemLikeAsync id: ', id, `access_token: ${access_token}`);
 
     return axios.post(setLikePhotoItemUrl(id),
       {},
@@ -78,12 +85,14 @@ export const photoItemLikeAsync = createAsyncThunk(
 export const photoItemBadAsync = createAsyncThunk(
   'photoItemLike/fetch',
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
-    console.log('photoItemLikeAsync id: ', id);
     const {getState, dispatch} = reduxTK;
-    const access_token = getState().authReducer.access_token;
-    if(!access_token){
-      debugger;
+    let access_token = getState().authReducer.access_token;
+    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+    if (!access_token && settings && settings.auth) {
+      access_token = settings.auth.access_token;
     }
+
+    console.log('photoItemBadAsync id: ', id, `access_token: ${access_token}`);
 
     return axios.delete(setLikePhotoItemUrl(id),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})

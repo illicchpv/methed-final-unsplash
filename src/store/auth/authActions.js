@@ -35,6 +35,18 @@ export const authAsync = createAsyncThunk(
             response.data.refresh_token = refresh_token;
             response.data.request_limit = +response.headers['x-ratelimit-limit'];
             response.data.request_remaining = +response.headers['x-ratelimit-remaining'];
+
+            const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+            settings.auth = {
+              code,
+              access_token,
+              refresh_token,
+              userInfo: {
+                name: response.data.name,
+                largeImage: response.data.profile_image.large,
+              }
+            }
+            sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
             return response.data;
           });
       });

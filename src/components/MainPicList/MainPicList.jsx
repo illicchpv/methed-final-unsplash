@@ -1,6 +1,4 @@
 import _ from './MainPicList.module.css';
-import like0 from "../../img/Like_0.svg";
-import like1 from "../../img/Like_1.svg";
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {photoListAsync} from '../../store/photoList/photoListActions';
@@ -17,11 +15,13 @@ export function MainPicList(props) {
   const dispatch = useDispatch();
   const {loading, error, photoList, page} = useSelector(state => state.photoListReducer);
   const userInfo = useSelector(state => state.authReducer.userInfo);
+  const access_token = useSelector(state => state.authReducer.access_token);
+  console.log('access_token: ', access_token);
   const logIn = !!userInfo?.name;
   const endList = useRef(null);
   const [autoLoad, setAutoLoad] = useState(false);
 
-  const handleAutoloadChange = () => {
+  const handleAutoLoadChange = () => {
     setAutoLoad(prev => !prev);
   };
 
@@ -34,6 +34,7 @@ export function MainPicList(props) {
         // console.log('entries[0].isIntersecting: ', entries[0].isIntersecting);
         if (entries[0].isIntersecting) {
           const nn = page + 1;
+          // debugger;
           dispatch(photoListAsync(nn));
         }
       }, {rootMargin: '100px'});
@@ -45,13 +46,25 @@ export function MainPicList(props) {
             observer.unobserve(c);
           };
         } else {
+          console.log('11111111111 photoListAsync: ');
           dispatch(photoListAsync(1));
+          // setTimeout(() => {
+          //   debugger;
+          //   dispatch(photoListAsync(1));
+          // }, 1000);
         }
-      } else {
-        if (page === 0) dispatch(photoListAsync(1));
+      } 
+      else {
+        dispatch(photoListAsync(1));
+        // if (page === 0) {
+        //   setTimeout(() => {
+        //     console.log('22222222222222 photoListAsync: ');
+        //     dispatch(photoListAsync(1));
+        //   }, 0);
+        // }
       }
     }
-  }, [page, loading, error, dispatch, autoLoad, c]);
+  }, [page, access_token, loading, error, dispatch, autoLoad, c]);
 
 
   return (
@@ -70,7 +83,7 @@ export function MainPicList(props) {
             }}
           >load next {PICTURES_PER_PAGE}</button>
 
-          <label><input type='checkbox' onChange={handleAutoloadChange}></input> авто загрузка</label>
+          <label><input type='checkbox' onChange={handleAutoLoadChange}></input> авто загрузка</label>
         </section>
 
         <section className={_.content}>
