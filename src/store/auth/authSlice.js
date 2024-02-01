@@ -27,13 +27,13 @@ export const authSlice = createSlice({
       state.access_token = '';
       state.refresh_token = '';
       state.userInfo = {};
-      const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+      const settings = JSON.parse(localStorage.getItem(SS_KEY));
       settings.auth = undefined;
-      sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
+      localStorage.setItem(SS_KEY, JSON.stringify(settings));
     },
     // dispatch(authSlice.actions.authRestore());
     authRestore: (state, action) => {
-      const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+      const settings = JSON.parse(localStorage.getItem(SS_KEY));
       if (settings && settings.auth) {
         state.code = settings.auth.code;
         state.access_token = settings.auth.access_token;

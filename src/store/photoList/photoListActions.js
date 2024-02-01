@@ -12,7 +12,7 @@ export const photoListAsync = createAsyncThunk(
     const {getState} = reduxTK;
     const access_token = takeAccessToken(getState);
     // let access_token = getState().authReducer.access_token;
-    // const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+    // const settings = JSON.parse(localStorage.getItem(SS_KEY));
     // if (!access_token && settings && settings.auth) {
     //   access_token = settings.auth.access_token;
     // }

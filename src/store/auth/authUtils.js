@@ -37,7 +37,7 @@ export const handleDoAuth = (add) => {
   // store current page
   const pagePath = window.location.pathname;
   // console.log('window.location.pathname: ', pagePath);
-  sessionStorage.setItem(SS_KEY, JSON.stringify({pagePath: pagePath}));
+  localStorage.setItem(SS_KEY, JSON.stringify({pagePath: pagePath}));
 
   // redirect to auth unsplash page
   const searchParams = new URLSearchParams('');
@@ -50,12 +50,12 @@ export const handleDoAuth = (add) => {
 };
 
 export const restoreCurPage = (navigate, requestCount) => {
-  const settings = JSON.parse(sessionStorage.getItem(SS_KEY)); // , JSON.stringify({pagePath: pagePath})
+  const settings = JSON.parse(localStorage.getItem(SS_KEY)); // , JSON.stringify({pagePath: pagePath})
   if (settings && settings?.pagePath) {
     let path = settings.pagePath; settings.pagePath = '';
     path = path.replaceAll(SITE_ROOT, '/')
     // console.log(`requestCount: [${requestCount}] ======== path: [${path}] ===========`);
-    sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
+    localStorage.setItem(SS_KEY, JSON.stringify(settings));
     navigate(path);
   }
 };

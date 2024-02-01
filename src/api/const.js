@@ -2,8 +2,8 @@ export const TEST_MENU = false;
 
 export const SS_KEY = 'finalUnsplash';
 
-// const appPlace = 0; // 0-local
-const appPlace = 1; // 1-github 
+const appPlace = 0; // 0-local
+// const appPlace = 1; // 1-github 
 
 const ACCESS_KEY_0 = '5HKN-FQSq9cXLU8Xj80_YKixrim1ZBCIoxacqc73sL0';
 const SECRET_KEY_0 = 'bLaj9yb-zky0XtOmQ1Ckqz5hrNUIzARdw_sQznWKebI';

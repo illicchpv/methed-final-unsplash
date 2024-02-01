@@ -40,7 +40,7 @@ export const authAsync = createAsyncThunk(
             response.data.request_limit = +response.headers['x-ratelimit-limit'];
             response.data.request_remaining = +response.headers['x-ratelimit-remaining'];
 
-            const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+            const settings = JSON.parse(localStorage.getItem(SS_KEY));
             settings.auth = {
               code,
               access_token,
@@ -50,7 +50,7 @@ export const authAsync = createAsyncThunk(
                 largeImage: response.data.profile_image.large,
               }
             };
-            sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
+            localStorage.setItem(SS_KEY, JSON.stringify(settings));
             return response.data;
           });
       });
