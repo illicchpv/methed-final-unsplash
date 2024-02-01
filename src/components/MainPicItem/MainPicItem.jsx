@@ -12,9 +12,9 @@ export function MainPicItem(props) {
   const {loading, error, photoItem: el} = useSelector(state => state.photoItemReducer);
   const userInfo = useSelector(state => state.authReducer.userInfo);
   const logIn = !!userInfo?.name;
-  console.log('userInfo?.name: ', userInfo?.name);
+  // console.log('userInfo?.name: ', userInfo?.name);
 
-  console.log(`logIn:${logIn} el.liked_by_user: `, el.liked_by_user);
+  // console.log(`logIn:${logIn} el.liked_by_user: `, el.liked_by_user);
 
   useEffect(() => {
     dispatch(photoItemAsync(id)); // 

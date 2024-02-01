@@ -16,7 +16,7 @@ export function MainPicList(props) {
   const {loading, error, photoList, page} = useSelector(state => state.photoListReducer);
   const userInfo = useSelector(state => state.authReducer.userInfo);
   const access_token = useSelector(state => state.authReducer.access_token);
-  console.log('access_token: ', access_token);
+  // console.log('access_token: ', access_token);
   const logIn = !!userInfo?.name;
   const endList = useRef(null);
   const [autoLoad, setAutoLoad] = useState(false);
@@ -55,13 +55,13 @@ export function MainPicList(props) {
         }
       } 
       else {
-        dispatch(photoListAsync(1));
-        // if (page === 0) {
-        //   setTimeout(() => {
-        //     console.log('22222222222222 photoListAsync: ');
-        //     dispatch(photoListAsync(1));
-        //   }, 0);
-        // }
+        console.log('22222222222222 photoListAsync: ');
+        // dispatch(photoListAsync(1));
+        if (page === 0) {
+          setTimeout(() => {
+            dispatch(photoListAsync(1));
+          }, 0);
+        }
       }
     }
   }, [page, access_token, loading, error, dispatch, autoLoad, c]);

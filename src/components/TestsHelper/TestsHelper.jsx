@@ -6,7 +6,7 @@ export function TestsHelper(props) {
   const navigate = useNavigate();
   let location = useLocation();
   const pages = props.pages;
-  console.log('pages: ', pages);
+  // console.log('pages: ', pages);
 
   return (
     <div className={_.TestsHelper}>

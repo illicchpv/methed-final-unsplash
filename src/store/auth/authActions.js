@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {URL_GET_TOKEN, URL_GET_USER_INFO, makeAuthParams} from "./authUtils";
+import {SS_KEY} from "../../api/const";
 
 // import {authAsync} from './store/auth/authActions';
 // dispatch(authAsync(code));
@@ -13,6 +14,9 @@ export const authAsync = createAsyncThunk(
       debugger;
       return;
     }
+
+    console.log('👉authAsync code: ', code);
+    // debugger; // ?
 
     return axios.post(URL_GET_TOKEN,
       makeAuthParams(code, ''),
@@ -36,7 +40,7 @@ export const authAsync = createAsyncThunk(
             response.data.request_limit = +response.headers['x-ratelimit-limit'];
             response.data.request_remaining = +response.headers['x-ratelimit-remaining'];
 
-            const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+            const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
             settings.auth = {
               code,
               access_token,
@@ -45,8 +49,8 @@ export const authAsync = createAsyncThunk(
                 name: response.data.name,
                 largeImage: response.data.profile_image.large,
               }
-            }
-            sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
+            };
+            sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
             return response.data;
           });
       });

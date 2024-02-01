@@ -21,7 +21,7 @@ export function MainPicListItem(props) {
     dispatch(photoItemBadAsync(id));
   };
   
-  console.log('location.pathname: ', location.pathname);
+  // console.log('location.pathname: ', location.pathname);
 
   return (
     <li className={_.MainPicListItem}>

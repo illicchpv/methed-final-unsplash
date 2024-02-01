@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {authAsync} from "./authActions";
+import {SS_KEY} from "../../api/const";
 
 const initialState = {
   loading: false,
@@ -26,13 +27,13 @@ export const authSlice = createSlice({
       state.access_token = '';
       state.refresh_token = '';
       state.userInfo = {};
-      const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+      const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
       settings.auth = undefined;
-      sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
+      sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
     },
     // dispatch(authSlice.actions.authRestore());
     authRestore: (state, action) => {
-      const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
+      const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
       if (settings && settings.auth) {
         state.code = settings.auth.code;
         state.access_token = settings.auth.access_token;

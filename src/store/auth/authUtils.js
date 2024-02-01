@@ -13,6 +13,7 @@ import {
   SECRET_KEY,
   URL_API,
   SITE_ROOT,
+  SS_KEY,
 } from '../../api/const';
 
 // https://unsplash.com/documentation/user-authentication-workflow#authorization-workflow
@@ -35,8 +36,8 @@ export const handleDoAuth = (add) => {
   // console.log('add: ', add);
   // store current page
   const pagePath = window.location.pathname;
-  console.log('window.location.pathname: ', pagePath);
-  sessionStorage.setItem('finalUnsplash', JSON.stringify({pagePath: pagePath}));
+  // console.log('window.location.pathname: ', pagePath);
+  sessionStorage.setItem(SS_KEY, JSON.stringify({pagePath: pagePath}));
 
   // redirect to auth unsplash page
   const searchParams = new URLSearchParams('');
@@ -49,12 +50,12 @@ export const handleDoAuth = (add) => {
 };
 
 export const restoreCurPage = (navigate, requestCount) => {
-  const settings = JSON.parse(sessionStorage.getItem('finalUnsplash')); // , JSON.stringify({pagePath: pagePath})
+  const settings = JSON.parse(sessionStorage.getItem(SS_KEY)); // , JSON.stringify({pagePath: pagePath})
   if (settings && settings?.pagePath) {
     let path = settings.pagePath; settings.pagePath = '';
     path = path.replaceAll(SITE_ROOT, '/')
-    console.log(`requestCount: [${requestCount}] ======== path: [${path}] ===========`);
-    sessionStorage.setItem('finalUnsplash', JSON.stringify(settings));
+    // console.log(`requestCount: [${requestCount}] ======== path: [${path}] ===========`);
+    sessionStorage.setItem(SS_KEY, JSON.stringify(settings));
     navigate(path);
   }
 };

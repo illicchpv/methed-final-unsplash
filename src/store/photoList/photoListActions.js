@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getPhotoListUrl} from "./photoListUtils";
 import {uniqByKeepFirst} from "../../utils/uniqByKey";
+import {takeAccessToken} from "../../utils/takeAccessToken";
 
 // import {photoListAsync} from "../../store/photoList/photoListActions";
 // dispatch(photoListAsync(1)); // 1 -page
@@ -9,14 +10,16 @@ export const photoListAsync = createAsyncThunk(
   'photoList/fetch',
   (page, reduxTK) => { // const {getState, dispatch} = reduxTK;
     const {getState} = reduxTK;
-    let access_token = getState().authReducer.access_token;
-    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
-    if (!access_token && settings && settings.auth) {
-      access_token = settings.auth.access_token;
-    }
+    const access_token = takeAccessToken(getState);
+    // let access_token = getState().authReducer.access_token;
+    // const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+    // if (!access_token && settings && settings.auth) {
+    //   access_token = settings.auth.access_token;
+    // }
     const photoList = getState().photoListReducer.photoList;
 
     console.log('👉photoListAsync page: ', page, `access_token: ${access_token}`);
+    // debugger; // ?
 
     return axios.get(getPhotoListUrl(page),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})

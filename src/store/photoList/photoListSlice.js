@@ -26,7 +26,7 @@ export const photoListSlice = createSlice({
       const id = action.payload.id;
       const like = action.payload.like;
       const photoItem = state.photoList.find((el) => el.id === id);
-      console.log('photoItem: ', photoItem);
+      // console.log('photoItem: ', photoItem);
       if(photoItem) photoItem.liked_by_user = like;
       state.loading = 0;
       state.error = '';
@@ -46,7 +46,7 @@ export const photoListSlice = createSlice({
       // debugger
       state.loading -= 1;
       if (state.loading < 0) {
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = '';
@@ -57,7 +57,7 @@ export const photoListSlice = createSlice({
       // debugger
       state.loading -= 1;
       if (state.loading < 0) {
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = action.error.message;

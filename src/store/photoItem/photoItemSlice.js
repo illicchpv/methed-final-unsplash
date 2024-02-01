@@ -34,7 +34,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = '';
@@ -44,7 +44,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = action.error.message;
@@ -59,7 +59,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = '';
@@ -69,7 +69,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = action.error.message;
@@ -84,7 +84,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = '';
@@ -94,7 +94,7 @@ export const photoItemSlice = createSlice({
       // debugger
       state.loading -= 1;
       if(state.loading < 0){
-        console.log('state.loading < 0: ', state.loading);
+        // console.log('state.loading < 0: ', state.loading);
         state.loading = 0;
       }
       state.error = action.error.message;

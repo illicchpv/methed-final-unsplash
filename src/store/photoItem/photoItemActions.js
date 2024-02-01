@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getPhotoItemUrl, setLikePhotoItemUrl} from "./photoItemUtils";
 import {photoListSlice} from "../photoList/photoListSlice";
+import {takeAccessToken} from "../../utils/takeAccessToken";
 
 // import {photoItemAsync} from "../../store/photoItem/photoItemActions";
 // dispatch(photoItemAsync(id)); // 
@@ -9,13 +10,15 @@ export const photoItemAsync = createAsyncThunk(
   'photoItem/fetch',
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
     const {getState} = reduxTK;
-    let access_token = getState().authReducer.access_token;
-    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
-    if (!access_token && settings && settings.auth) {
-      access_token = settings.auth.access_token;
-    }
+    const access_token = takeAccessToken(getState);
+    // let access_token = getState().authReducer.access_token;
+    // const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+    // if (!access_token && settings && settings.auth) {
+    //   access_token = settings.auth.access_token;
+    // }
 
     console.log('👉photoItemAsync id: ', id, `access_token: ${access_token}`);
+    // debugger; // ?
 
     return axios.get(getPhotoItemUrl(id),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})
@@ -58,15 +61,17 @@ export const photoItemAsync = createAsyncThunk(
 export const photoItemLikeAsync = createAsyncThunk(
   'photoItemLike/fetch',
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
-    console.log('photoItemLikeAsync id: ', id);
+    // console.log('photoItemLikeAsync id: ', id);
     const {getState, dispatch} = reduxTK;
-    let access_token = getState().authReducer.access_token;
-    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
-    if (!access_token && settings && settings.auth) {
-      access_token = settings.auth.access_token;
-    }
+    const access_token = takeAccessToken(getState);
+    // let access_token = getState().authReducer.access_token;
+    // const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+    // if (!access_token && settings && settings.auth) {
+    //   access_token = settings.auth.access_token;
+    // }
 
-    console.log('photoItemLikeAsync id: ', id, `access_token: ${access_token}`);
+    console.log('👉photoItemLikeAsync id: ', id, `access_token: ${access_token}`);
+    // debugger; // ?
 
     return axios.post(setLikePhotoItemUrl(id),
       {},
@@ -86,13 +91,15 @@ export const photoItemBadAsync = createAsyncThunk(
   'photoItemLike/fetch',
   (id, reduxTK) => { // const {getState, dispatch} = reduxTK;
     const {getState, dispatch} = reduxTK;
-    let access_token = getState().authReducer.access_token;
-    const settings = JSON.parse(sessionStorage.getItem('finalUnsplash'));
-    if (!access_token && settings && settings.auth) {
-      access_token = settings.auth.access_token;
-    }
+    const access_token = takeAccessToken(getState);
+    // let access_token = getState().authReducer.access_token;
+    // const settings = JSON.parse(sessionStorage.getItem(SS_KEY));
+    // if (!access_token && settings && settings.auth) {
+    //   access_token = settings.auth.access_token;
+    // }
 
-    console.log('photoItemBadAsync id: ', id, `access_token: ${access_token}`);
+    console.log('👉photoItemBadAsync id: ', id, `access_token: ${access_token}`);
+    // debugger; // ?
 
     return axios.delete(setLikePhotoItemUrl(id),
       (access_token ? {headers: {'Authorization': `Bearer ${access_token}`}} : {})
